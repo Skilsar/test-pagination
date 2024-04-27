@@ -12,3 +12,5 @@
 (например: `postgresql://user:password@localhost:5432/test_pagination?sslmode=disable`). 
 
 Для загрузки данных в БД используйте файл `test_pagination_localhost-dump.sql` (например: `psql -h localhost -U user -d test_pagination -f test_pagination_localhost-dump.sql`).
+
+psql -h localhost -U user -d test_pagination -f test_pagination_localhost-dump.sql

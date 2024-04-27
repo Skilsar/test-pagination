@@ -1,5 +1,5 @@
 import { UserService } from './users.service';
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Controller, Get, Logger, Query } from '@nestjs/common';
 import {UsersResponseDto} from "./users.response.dto";
 
 @Controller('users')
@@ -8,9 +8,12 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get()
-  async getAllUsers() {
-    this.logger.log('Get all users');
-    const users = await this.userService.findAll();
-    return users.map((user) => UsersResponseDto.fromUsersEntity(user));
+  async getUsers(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ): Promise<{ users: UsersResponseDto[]; total: number }> {
+    const parsedPage = parseInt(page, 10) || 1;
+    const parsedLimit = parseInt(limit, 10) || 20;
+    return this.userService.findAll(parsedPage, parsedLimit);
   }
 }

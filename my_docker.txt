@@ -1,0 +1,2 @@
+docker run --name test_pagination -p 5432:5432 -e POSTGRES_USER=user -e POSTGRES_PASSWORD=qwerhh123 -e POSTGRES_DB=test_pagination -d postgres
+psql -h localhost -U user -d test_pagination -f media/test_pagination_localhost-dump.sql
